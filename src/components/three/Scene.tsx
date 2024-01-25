@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Environment, Sparkles } from '@react-three/drei'
+import { Environment } from '@react-three/drei'
 import { Laptop } from './Laptop'
 
 export const Scene = () => {
@@ -8,7 +8,6 @@ export const Scene = () => {
             <color args={['#2A303A']} attach='background' />
             <Environment preset='city' />
             <Laptop />
-            <Sparkles />
         </Suspense>
     )
 }

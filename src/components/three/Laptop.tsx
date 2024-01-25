@@ -4,7 +4,6 @@ import {
     useGLTF,
     Html,
     ContactShadows,
-    Resize,
 } from '@react-three/drei'
 
 import { Name3d } from './Name3d'
@@ -17,41 +16,6 @@ export const Laptop = () => {
     // const { size, camera, scene } = useThree()
     const laptopRef = useRef<THREE.Mesh>(null!)
     const iframeRef = useRef<HTMLIFrameElement>(null!)
-
-    // // adjust the position and scale of the iframe
-    // const updateIframePosition = () => {
-    //     if (!laptopRef.current || !iframeRef.current) return
-
-    //     // calculate the new position based on the camera and laptop screen position
-    //     const laptopScreen = laptopRef.current
-    //     const vector = new THREE.Vector3()
-    //     laptopScreen.getWorldPosition(vector)
-
-    //     // convert 3d position to 2d position
-    //     vector.project(camera)
-    //     vector.x = (vector.x * 0.5 + 0.5) * size.width
-    //     vector.y = -(vector.y * 0.5 - 0.5) * size.height
-
-    //     // Update the position of the iframe
-    //     iframeRef.current.style.left = `${vector.x}px`
-    //     iframeRef.current.style.top = `${vector.y}px`
-    // }
-
-    // useEffect(() => {
-    //     // const handleResize = () => {
-    //     //     //update the position of the HTML component
-    //     //     // based on the new size and camera position
-    //     // }
-    //     window.addEventListener('resize', updateIframePosition)
-
-    //     // initial position update
-    //     updateIframePosition()
-
-    //     return () => {
-    //         // remove event listener
-    //         window.removeEventListener('resize', updateIframePosition)
-    //     }
-    // }, [size, camera, scene])
 
     return (
         <>
@@ -72,35 +36,35 @@ export const Laptop = () => {
                         rotation={[0.1, Math.PI, 0]}
                         position={[0, 0.55, -1.15]}
                     />
-                    <Resize scale={2}>
-                        <primitive
-                            object={laptop.scene}
-                            position-y={-1}
-                            ref={laptopRef}
+
+                    <primitive
+                        object={laptop.scene}
+                        position-y={-0.8}
+                        ref={laptopRef}
+                    >
+                        <Html
+                            transform
+                            wrapperClass='htmlScreen'
+                            distanceFactor={0.48}
+                            position={[0.05, 0.85, -0.9]}
+                            rotation={[-0.17, 0.02, 0]}
+                            scale={1.5}
                         >
-                            <Html
-                                transform
-                                wrapperClass='htmlScreen'
-                                distanceFactor={0.7}
-                                position={[0, 0.67, -0.8]}
-                                rotation={[-0.17, 0, 0]}
-                            >
-                                <iframe
-                                    src='https://samazevedo.dev'
-                                    ref={iframeRef}
-                                ></iframe>
-                            </Html>
-                        </primitive>
-                        <Name3d />
-                    </Resize>
+                            <iframe
+                                src='https://samazevedo.dev'
+                                ref={iframeRef}
+                            ></iframe>
+                        </Html>
+                    </primitive>
+                    <Name3d />
                 </Float>
             </PresentationControls>
-            {/* <ContactShadows
-                position={[0, -1.5, 0]}
-                opacity={0.7}
+            <ContactShadows
+                position={[0, -1.4, 0]}
+                opacity={0.4}
                 scale={3}
-                blur={1}
-            ></ContactShadows> */}
+                blur={0.9}
+            ></ContactShadows>
         </>
     )
 }
